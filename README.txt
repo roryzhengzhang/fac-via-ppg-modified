@@ -1,0 +1,3 @@
+- The recordings are essentially the same as the ones you can download from L2-ARCTIC (https://psi.engr.tamu.edu/l2-arctic-corpus)
+- The only thing different here is that we used Audacity to perform a noise reduction to remove the ambient background noise
+- YKWK skipped one sentence while recording, so he only has 1131 audio files
