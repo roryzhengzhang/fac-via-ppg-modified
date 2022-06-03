@@ -1,0 +1,11 @@
+INFO:root:Output dir: output-audio/aaron-016/
+DEBUG:root:Tacotron: checkpoint/checkpoint-aaron/checkpoint_28200
+DEBUG:root:Waveglow: interspeech19-stage/ppg2speech-si-am-si-tacotron-bdl2ykwk-final/waveglow_270000
+DEBUG:root:AM: SI model
+DEBUG:root:is_clip: 0
+DEBUG:root:Fs: 16000
+DEBUG:root:Sigma: 0.600000
+DEBUG:root:Denoiser strength: 0.005000
+DEBUG:root:Denoiser mode: zeros
+INFO:root:Perform AC on teacher-utterance/arctic_a0016.wav
+INFO:root:Done!
