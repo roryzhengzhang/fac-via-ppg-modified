@@ -80,7 +80,16 @@ if __name__ == '__main__':
 
     # Load models.
     tacotron_model = load_model(hparams)
-    tacotron_model.load_state_dict(torch.load(checkpoint_path)['state_dict'])
+    state_dict = torch.load(checkpoint_path)['state_dict']
+    from collections import OrderedDict
+    new_state_dict = OrderedDict()
+    for k, v in state_dict.items():
+        name = k[7:] # remove `module.`
+        new_state_dict[name] = v
+    # load params
+    tacotron_model.load_state_dict(new_state_dict)
+
+    # tacotron_model.load_state_dict(torch.load(checkpoint_path)['state_dict'])
     _ = tacotron_model.eval()
     waveglow_model = load_waveglow_model(waveglow_path)
 
