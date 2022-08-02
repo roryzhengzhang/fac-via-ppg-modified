@@ -54,10 +54,10 @@ def create_hparams(**kwargs):
         "dist_url": "tcp://localhost:54321",
         "cudnn_enabled": True,
         "cudnn_benchmark": False,
-        "output_directory": '/home/zheng_zhang7/fac-via-ppg/src/checkpoint',  # Directory to save checkpoints.
+        "output_directory": None,  # Directory to save checkpoints.
         # Directory to save tensorboard logs. Just keep it like this.
         "log_directory": 'log',
-        "checkpoint_path": '/home/zheng_zhang7/fac-via-ppg/interspeech19-stage/ppg2speech-si-am-si-tacotron-bdl2ykwk-final/tacotron_checkpoint_11000',  # Path to a checkpoint file.
+        "checkpoint_path": '',  # Path to a checkpoint file.
         "warm_start": False,  # Load the model only (warm start)
         "n_gpus": 1,  # Number of GPUs
         "rank": 0,  # Rank of current gpu
@@ -68,10 +68,10 @@ def create_hparams(**kwargs):
         ################################
         # Passed as a txt file, see data/filelists/training-set.txt for an
         # example.
-        "training_files": '/home/zheng_zhang7/fac-via-ppg/data/filelists/training-set.txt',
+        "training_files": '',
         # Passed as a txt file, see data/filelists/validation-set.txt for an
         # example.
-        "validation_files": '/home/zheng_zhang7/fac-via-ppg/data/filelists/validation-set.txt',
+        "validation_files": '',
         "is_full_ppg": True,  # Whether to use the full PPG or not.
         "is_append_f0": False,  # Currently only effective at sentence level
         "ppg_subsampling_factor": 1,  # Sub-sample the ppg & acoustic sequence.
@@ -103,27 +103,24 @@ def create_hparams(**kwargs):
         # Model Parameters             #
         ################################
         "n_symbols": 5816,
-        # "symbols_embedding_dim": 600,
-        "symbols_embedding_dim": 512,
+        "symbols_embedding_dim": 600,
 
         # Encoder parameters
         "encoder_kernel_size": 5,
         "encoder_n_convolutions": 3,
-        # "encoder_embedding_dim": 600,
-        "encoder_embedding_dim": 512,
+        "encoder_embedding_dim": 600,
 
         # Decoder parameters
-        # "decoder_rnn_dim": 300,
-        "decoder_rnn_dim": 1024,
-        "prenet_dim": 256,
+        "decoder_rnn_dim": 300,
+        "prenet_dim": 300,
         "max_decoder_steps": 1000,
         "gate_threshold": 0.5,
         "p_attention_dropout": 0.1,
         "p_decoder_dropout": 0.1,
 
         # Attention parameters
-        "attention_rnn_dim": 1024,
-        "attention_dim": 128,
+        "attention_rnn_dim": 300,
+        "attention_dim": 150,
         # +- time steps to look at when computing the attention. Set to None
         # to block it.
         "attention_window_size": 20,
@@ -171,19 +168,18 @@ def create_hparams_stage(**kwargs):
         'attention_dim': 150,
         'attention_location_kernel_size': 31,
         'attention_location_n_filters': 32,
-        'attention_rnn_dim': 1024,
+        'attention_rnn_dim': 300,
         'attention_window_size': 20,
         'batch_size': 6,
         'checkpoint_path': None,
         'cudnn_benchmark': False,
         'cudnn_enabled': True,
-        'decoder_rnn_dim': 1024,
+        'decoder_rnn_dim': 300,
         'dist_backend': 'nccl',
         'dist_url': 'tcp://localhost:54321',
         'distributed_run': False,
         'dynamic_loss_scaling': True,
-        # 'encoder_embedding_dim': 600,
-        'encoder_embedding_dim': 512,
+        'encoder_embedding_dim': 600,
         'encoder_kernel_size': 5,
         'encoder_n_convolutions': 3,
         'epochs': 1000,
@@ -221,13 +217,12 @@ def create_hparams_stage(**kwargs):
         'postnet_kernel_size': 5,
         'postnet_n_convolutions': 5,
         'ppg_subsampling_factor': 1,
-        'prenet_dim': 256,
+        'prenet_dim': 300,
         'rank': 0,
         'sampling_rate': 16000,
         'seed': 16807,
         'sequence_level': 'sentence',
-        # 'symbols_embedding_dim': 600,
-        'symbols_embedding_dim': 512,
+        'symbols_embedding_dim': 600,
         'training_files': '',
         'use_saved_learning_rate': False,
         'validation_files': '',
