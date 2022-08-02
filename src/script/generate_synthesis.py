@@ -19,6 +19,7 @@ from common.utils import waveglow_audio, get_inference, load_waveglow_model
 from scipy.io import wavfile
 from train_ppg2mel import load_model
 from waveglow.denoiser import Denoiser
+import numpy as np
 import argparse
 import logging
 import os
@@ -97,6 +98,7 @@ if __name__ == '__main__':
             ac_wav, strength=denoiser_strength)[:, 0].cpu().numpy().T
 
         output_file = os.path.join(output_dir, 'ac.wav')
+        np.save("alignement.npy", alignments)
         wavfile.write(output_file, fs, ac_wav)
     else:
         logging.warning('Missing %s', teacher_utt_path)
