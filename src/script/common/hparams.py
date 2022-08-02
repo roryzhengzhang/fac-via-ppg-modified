@@ -168,7 +168,7 @@ def create_hparams_stage(**kwargs):
     """
 
     hparams = {
-        'attention_dim': 150,
+        'attention_dim': 128,
         'attention_location_kernel_size': 31,
         'attention_location_n_filters': 32,
         'attention_rnn_dim': 1024,
