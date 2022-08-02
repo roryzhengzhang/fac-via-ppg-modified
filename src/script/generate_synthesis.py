@@ -99,7 +99,10 @@ if __name__ == '__main__':
 
     if os.path.isfile(teacher_utt_path):
         logging.info('Perform AC on %s', teacher_utt_path)
-        teacher_ppg = get_ppg(teacher_utt_path, deps)
+        # teacher_ppg = get_ppg(teacher_utt_path, deps)
+        
+
+        teacher_ppg = np.load('~/seq2seq_accent_conversion_model/ppg_emb/bdl/bdl_arctic_a0001.npy')
         print(f"teacher_ppg size: {teacher_ppg.shape}")
         ac_mel, alignments = get_inference(teacher_ppg, tacotron_model, is_clip)
         print(f"mel size: {ac_mel.size()}")
