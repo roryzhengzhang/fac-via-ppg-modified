@@ -98,7 +98,7 @@ if __name__ == '__main__':
             ac_wav, strength=denoiser_strength)[:, 0].cpu().numpy().T
 
         output_file = os.path.join(output_dir, 'ac.wav')
-        np.save("alignement.npy", alignments)
+        np.save("alignement.npy", alignments.numpy())
         wavfile.write(output_file, fs, ac_wav)
     else:
         logging.warning('Missing %s', teacher_utt_path)
