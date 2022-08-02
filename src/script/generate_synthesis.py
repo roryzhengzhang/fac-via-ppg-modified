@@ -87,8 +87,10 @@ if __name__ == '__main__':
 
     if os.path.isfile(teacher_utt_path):
         logging.info('Perform AC on %s', teacher_utt_path)
-        teacher_ppg = get_ppg(teacher_utt_path, deps)
+        teacher_ppg, alignments = get_ppg(teacher_utt_path, deps)
+        print(f"teacher_ppg size: {teacher_ppg.size()}")
         ac_mel = get_inference(teacher_ppg, tacotron_model, is_clip)
+        print(f"mel size: {ac_mel.size()}")
         ac_wav = waveglow_audio(ac_mel, waveglow_model,
                                 waveglow_sigma, True)
         ac_wav = denoiser(

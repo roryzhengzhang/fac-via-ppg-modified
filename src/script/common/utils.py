@@ -171,7 +171,7 @@ def get_inference(seq, model, is_clip=False):
     if is_clip:
         return mel_outputs_postnet[:, :, 10:(seq.size(2)-10)]
     else:
-        return mel_outputs_postnet
+        return mel_outputs_postnet, alignments
 
 
 def load_waveglow_model(path):
