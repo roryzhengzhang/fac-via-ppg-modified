@@ -85,6 +85,8 @@ if __name__ == '__main__':
     from collections import OrderedDict
     new_state_dict = OrderedDict()
     for k, v in state_dict.items():
+        if k == 'embedding.weight':
+            continue
         name = k # remove `module.`
         new_state_dict[name] = v
     # load params
