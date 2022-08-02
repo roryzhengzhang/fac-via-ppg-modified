@@ -81,6 +81,7 @@ if __name__ == '__main__':
     # Load models.
     tacotron_model = load_model(hparams)
     state_dict = torch.load(checkpoint_path)['state_dict']
+    print(state_dict)
     from collections import OrderedDict
     new_state_dict = OrderedDict()
     for k, v in state_dict.items():
