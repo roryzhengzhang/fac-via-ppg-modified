@@ -214,6 +214,7 @@ class PPGMelLoader(torch.utils.data.Dataset):
             with open(data_utterance_paths, 'r') as f:
                 for line in f:
                     line = line.replace('\n', '')
+                    print(f"line: {line}")
                     src_ppg, tar_mel, speaker_emb, accent_emb = line.split(',')
                     self.ppg_sequences.append(src_ppg)
                     self.acoustic_sequences.append(tar_mel)
