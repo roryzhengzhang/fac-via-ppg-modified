@@ -203,6 +203,7 @@ class PPGMelLoader(torch.utils.data.Dataset):
         self.accent_embs = []
 
         if self.load_feats_from_disk:
+            print(f"load feats from disk enabled")
             # print('Loading data from %s.' % self.feats_cache_path)
             # with open(self.feats_cache_path, 'rb') as f:
             #     data = pickle.load(f)
