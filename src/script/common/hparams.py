@@ -54,7 +54,7 @@ def create_hparams(**kwargs):
         "dist_url": "tcp://localhost:54321",
         "cudnn_enabled": True,
         "cudnn_benchmark": False,
-        "output_directory": '/home/zheng_zhang7/fac-via-ppg/src/checkpoint',  # Directory to save checkpoints.
+        "output_directory": '/home/zheng_zhang7/fac-via-ppg/checkpoint/train_0803',  # Directory to save checkpoints.
         # Directory to save tensorboard logs. Just keep it like this.
         "log_directory": 'log',
         'data_dir': '/home/zheng_zhang7/seq2seq_accent_conversion_model',
