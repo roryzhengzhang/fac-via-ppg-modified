@@ -254,7 +254,7 @@ class Decoder(nn.Module):
     def __init__(self, hparams):
         super(Decoder, self).__init__()
         self.n_acoustic_feat_dims = hparams.n_acoustic_feat_dims
-        self.encoder_embedding_dim = hparams.encoder_embedding_dim
+        self.encoder_embedding_dim = hparams.decoder_input_dim
         self.attention_rnn_dim = hparams.attention_rnn_dim
         self.decoder_rnn_dim = hparams.decoder_rnn_dim
         self.prenet_dim = hparams.prenet_dim
@@ -476,6 +476,7 @@ class Decoder(nn.Module):
                         memory_lengths, self.attention_window_size, time_step)
             else:
                 attention_windowed_mask = None
+
             acoustic_output, gate_output, attention_weights = self.decode(
                 decoder_input, attention_windowed_mask)
             acoustic_outputs += [acoustic_output.squeeze(1)]
@@ -585,9 +586,19 @@ class Tacotron2(nn.Module):
 
         # inputs: (B, D, T)
         encoder_outputs = self.encoder(inputs, input_lengths)
+        decoder_inputs = encoder_outputs
+
+        encoder_output_length = encoder_outputs.size(1)
+        if self.use_speaker_emb:
+            speaker_embs = speaker_embs.unsqueeze(1).repeat(1, encoder_output_length, 1)
+            decoder_inputs = torch.cat((decoder_inputs, speaker_embs), 2)
+
+        if self.use_accent_emb:
+            accent_embs = accent_embs.unsqueeze(1).repeat(1, encoder_output_length, 1)
+            decoder_inputs = torch.cat((decoder_inputs, accent_embs), 2)
 
         acoustic_outputs, gate_outputs, alignments = self.decoder(
-            encoder_outputs, targets, memory_lengths=input_lengths)
+            decoder_inputs, targets, memory_lengths=input_lengths)
 
         acoustic_outputs_postnet = self.postnet(acoustic_outputs)
         acoustic_outputs_postnet = acoustic_outputs + acoustic_outputs_postnet
@@ -599,8 +610,19 @@ class Tacotron2(nn.Module):
         inputs = self.parse_input(inputs)
         input_lengths = torch.cuda.LongTensor([t.shape[1] for t in inputs])
         encoder_outputs = self.encoder.inference(inputs)
+        decoder_inputs = encoder_outputs
+
+        encoder_output_length = encoder_outputs.size(1)
+        if self.use_speaker_emb:
+            speaker_embs = speaker_embs.unsqueeze(1).repeat(1, encoder_output_length, 1)
+            decoder_inputs = torch.cat((decoder_inputs, speaker_embs), 2)
+
+        if self.use_accent_emb:
+            accent_embs = accent_embs.unsqueeze(1).repeat(1, encoder_output_length, 1)
+            decoder_inputs = torch.cat((decoder_inputs, accent_embs), 2)
+
         acoustic_outputs, gate_outputs, alignments = self.decoder.inference(
-            encoder_outputs, input_lengths)
+            decoder_inputs, input_lengths)
 
         acoustic_outputs_postnet = self.postnet(acoustic_outputs)
         acoustic_outputs_postnet = acoustic_outputs + acoustic_outputs_postnet

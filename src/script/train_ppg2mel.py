@@ -35,6 +35,7 @@ import os
 import time
 import math
 from numpy import finfo
+from tqdm import tqdm 
 import torch
 import torch.distributed as dist
 from torch.utils.data.distributed import DistributedSampler
@@ -229,6 +230,7 @@ def train(output_directory, log_directory, checkpoint_path, warm_start, n_gpus,
     # ================ MAIN TRAINNIG LOOP! ===================
     for epoch in range(epoch_offset, hparams.epochs):
         print("Epoch: {}".format(epoch))
+        pbar = tqdm(total=len(train_loader), ncols=0, desc="train")
         for i, batch in enumerate(train_loader):
             start = time.perf_counter()
             for param_group in optimizer.param_groups:
@@ -253,6 +255,9 @@ def train(output_directory, log_directory, checkpoint_path, warm_start, n_gpus,
                     model.parameters(), hparams.grad_clip_thresh)
 
             optimizer.step()
+
+            pbar.update(1)
+            pbar.set_postfix(loss=loss.item(), grad_norm=grad_norm)
 
             overflow = optimizer.overflow if hparams.fp16_run else False
 
