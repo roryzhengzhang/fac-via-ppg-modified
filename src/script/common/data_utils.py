@@ -221,7 +221,7 @@ class PPGMelLoader(torch.utils.data.Dataset):
                     self.speaker_embs.append(speaker_emb)
                     self.accent_embs.append(accent_emb)
         else:
-            for utterance_path in self.data_utterance_paths:
+            for utterance_path in data_utterance_paths:
                 ppg_feat_pair = self.extract_utterance_feats(utterance_path,
                                                    self.is_full_ppg)
                 self.ppg_sequences.append(ppg_feat_pair[0].astype(
