@@ -236,6 +236,7 @@ class Encoder(nn.Module):
 
     def inference(self, x):
         # x: (B, D, T) -> (B, T, D) -> (B, D, T)
+        print(f"encoder input size: {x.size()}")
         x = self.prenet(x.transpose(1, 2)).transpose(1, 2)
 
         for conv in self.convolutions:
