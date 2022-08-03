@@ -164,6 +164,7 @@ def get_inference(seq, model, is_clip=False):
         synthesized mels.
     """
     # (T, D) numpy -> (1, D, T) cpu tensor
+    print(f"get_inference shape: {seq.size()}")
     seq = torch.from_numpy(seq).float().transpose(0, 1).unsqueeze(0)
     # cpu tensor -> gpu tensor
     seq = to_gpu(seq)
