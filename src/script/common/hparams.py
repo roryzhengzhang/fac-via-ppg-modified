@@ -69,6 +69,7 @@ def create_hparams(**kwargs):
         ################################
         # Passed as a txt file, see data/filelists/training-set.txt for an
         # example.
+        # "training_files": '/home/zheng_zhang7/fac-via-ppg/data/filelists/training-set.txt',
         "training_files": '/home/zheng_zhang7/fac-via-ppg/data/filelists/training-set.txt',
         # Passed as a txt file, see data/filelists/validation-set.txt for an
         # example.
