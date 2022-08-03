@@ -83,7 +83,7 @@ def create_hparams(**kwargs):
         # |True                  |False           |Please set cache path
         # |False                 |True            |Overwrite the cache path
         # |False                 |False           |Ignores the cache path
-        "load_feats_from_disk": False,  # Remember to set the path.
+        "load_feats_from_disk": True,  # Remember to set the path.
         # Mutually exclusive with 'load_feats_from_disk', will overwrite
         # 'feats_cache_path' if set.
         "is_cache_feats": False,
