@@ -357,7 +357,7 @@ class PPGMelLoader(torch.utils.data.Dataset):
             #            0::self.ppg_subsampling_factor, :])
             curr_ppg = self.ppg_sequences[index][0::self.ppg_subsampling_factor, :]
 
-        return torch.from_numpy(curr_ppg), torch.from_numpy(self.acoustic_sequences[index]), torch.from_numpy(self.speaker_embs[index]), torch.from_numpy(self.accent_embs[index])
+        return torch.from_numpy(curr_ppg), self.acoustic_sequences[index], torch.from_numpy(self.speaker_embs[index]), torch.from_numpy(self.accent_embs[index])
 
     def __len__(self):
         return len(self.ppg_sequences)
