@@ -254,7 +254,8 @@ class Decoder(nn.Module):
     def __init__(self, hparams):
         super(Decoder, self).__init__()
         self.n_acoustic_feat_dims = hparams.n_acoustic_feat_dims
-        self.encoder_embedding_dim = hparams.decoder_input_dim
+        self.encoder_embedding_dim = hparams.encoder_embedding_dim
+        self.decoder_input_dim = hparams.decoder_input_dim
         self.attention_rnn_dim = hparams.attention_rnn_dim
         self.decoder_rnn_dim = hparams.decoder_rnn_dim
         self.prenet_dim = hparams.prenet_dim
@@ -267,24 +268,24 @@ class Decoder(nn.Module):
                              [hparams.prenet_dim, hparams.prenet_dim])
 
         self.attention_rnn = nn.LSTMCell(
-            hparams.prenet_dim + hparams.encoder_embedding_dim,
+            hparams.prenet_dim + hparams.decoder_input_dim,
             hparams.attention_rnn_dim)
 
         self.attention_layer = Attention(
-            hparams.attention_rnn_dim, hparams.encoder_embedding_dim,
+            hparams.attention_rnn_dim, hparams.decoder_input_dim,
             hparams.attention_dim, hparams.attention_location_n_filters,
             hparams.attention_location_kernel_size)
 
         self.decoder_rnn = nn.LSTMCell(
-            hparams.attention_rnn_dim + hparams.encoder_embedding_dim,
+            hparams.attention_rnn_dim + hparams.decoder_input_dim,
             hparams.decoder_rnn_dim, 1)
 
         self.linear_projection = LinearNorm(
-            hparams.decoder_rnn_dim + hparams.encoder_embedding_dim,
+            hparams.decoder_rnn_dim + hparams.decoder_input_dim,
             hparams.n_acoustic_feat_dims)
 
         self.gate_layer = LinearNorm(
-            hparams.decoder_rnn_dim + hparams.encoder_embedding_dim, 1,
+            hparams.decoder_rnn_dim + hparams.decoder_input_dim, 1,
             bias=True, w_init_gain='sigmoid')
 
     def get_go_frame(self, memory):
@@ -329,7 +330,7 @@ class Decoder(nn.Module):
         self.attention_weights_cum = Variable(memory.data.new(
             B, MAX_TIME).zero_())
         self.attention_context = Variable(memory.data.new(
-            B, self.encoder_embedding_dim).zero_())
+            B, self.decoder_input_dim).zero_())
 
         self.memory = memory
         self.processed_memory = self.attention_layer.memory_layer(memory)
