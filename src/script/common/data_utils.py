@@ -216,10 +216,10 @@ class PPGMelLoader(torch.utils.data.Dataset):
                 for line in f:
                     line = line.replace('\n', '')
                     src_ppg, tar_mel, speaker_emb, accent_emb = line.split(',')
-                    self.ppg_sequences.append(src_ppg)
-                    self.acoustic_sequences.append(tar_mel)
-                    self.speaker_embs.append(speaker_emb)
-                    self.accent_embs.append(accent_emb)
+                    self.ppg_sequences.append(os.path.join(hparams.data_dir, src_ppg))
+                    self.acoustic_sequences.append(os.path.join(hparams.data_dir, tar_mel))
+                    self.speaker_embs.append(os.path.join(hparams.data_dir, speaker_emb))
+                    self.accent_embs.append(os.path.join(hparams.data_dir, accent_emb))
         else:
             print(f"load_feats_from_disk: {self.load_feats_from_disk}")
             for utterance_path in data_utterance_paths:
