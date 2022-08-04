@@ -592,6 +592,8 @@ class Tacotron2(nn.Module):
         encoder_outputs = self.encoder(inputs, input_lengths)
         decoder_inputs = encoder_outputs
 
+        print(f"encoder output size: {decoder_inputs.size()}")
+
         encoder_output_length = encoder_outputs.size(1)
         if self.use_speaker_emb:
             speaker_embs = speaker_embs.unsqueeze(1).repeat(1, encoder_output_length, 1)

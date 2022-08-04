@@ -116,7 +116,7 @@ def create_hparams(**kwargs):
         "encoder_n_convolutions": 3,
         # "encoder_embedding_dim": 600,
         "encoder_embedding_dim": 512,
-        "decoder_input_dim": 1024,
+        "decoder_input_dim": 512,
 
         # Decoder parameters
         # "decoder_rnn_dim": 300,
@@ -150,7 +150,7 @@ def create_hparams(**kwargs):
         "learning_rate": 1e-5,
         "weight_decay": 1e-6,
         "grad_clip_thresh": 1.0,
-        "batch_size": 6,
+        "batch_size": 48,
         "mask_padding": True,  # set model's padded outputs to padded values
         "mel_weight": 1,
         "gate_weight": 0.005
