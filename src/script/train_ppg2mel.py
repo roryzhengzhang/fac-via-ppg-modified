@@ -83,7 +83,7 @@ def init_distributed(hparams, n_gpus, rank, group_name):
 def prepare_dataloaders(hparams):
     # Get data, data loaders and collate function ready
     trainset = PPGMelLoader(hparams.training_files, hparams)
-    hparams.load_feats_from_disk = False
+    # hparams.load_feats_from_disk = False
     hparams.is_cache_feats = False
     hparams.feats_cache_path = ''
     valset = PPGMelLoader(hparams.validation_files, hparams)
