@@ -606,6 +606,8 @@ class Tacotron2(nn.Module):
                 if input_len < encoder_output_length:
                     accent_embs[i, input_len:, :] = 0
             decoder_inputs = torch.cat((decoder_inputs, accent_embs), 2)
+        
+        print(f"decoder input size: {decoder_inputs.size()}")
 
         acoustic_outputs, gate_outputs, alignments = self.decoder(
             decoder_inputs, targets, memory_lengths=input_lengths)
