@@ -60,8 +60,8 @@ def create_hparams(**kwargs):
         'data_dir': '/home/zheng_zhang7/seq2seq_accent_conversion_model',
         # "checkpoint_path": '/home/zheng_zhang7/fac-via-ppg/interspeech19-stage/ppg2speech-si-am-si-tacotron-bdl2ykwk-final/tacotron_checkpoint_11000',  # Path to a checkpoint file.
         "checkpoint_path": None,
-        "use_speaker_emb": False,
-        "use_accent_emb": False,
+        "use_speaker_emb": True,
+        "use_accent_emb": True,
         "warm_start": False,  # Load the model only (warm start)
         "n_gpus": 1,  # Number of GPUs
         "rank": 0,  # Rank of current gpu
@@ -115,8 +115,8 @@ def create_hparams(**kwargs):
         "encoder_kernel_size": 5,
         "encoder_n_convolutions": 3,
         # "encoder_embedding_dim": 600,
-        "encoder_embedding_dim": 512,
-        "decoder_input_dim": 512,
+        "": 512,
+        "decoder_input_dim": 1024,
 
         # Decoder parameters
         # "decoder_rnn_dim": 300,
