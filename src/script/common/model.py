@@ -549,16 +549,18 @@ class Tacotron2(nn.Module):
 
     def parse_batch(self, batch):
         ppg_padded, input_lengths, acoustic_padded, gate_padded,\
-            output_lengths = batch
+            output_lengths, speaker_emb, accent_emb = batch
         ppg_padded = to_gpu(ppg_padded).float()
         input_lengths = to_gpu(input_lengths).long()
         max_len = torch.max(input_lengths.data).item()
         acoustic_padded = to_gpu(acoustic_padded).float()
         gate_padded = to_gpu(gate_padded).float()
         output_lengths = to_gpu(output_lengths).long()
+        speaker_emb = to_gpu(speaker_emb).float()
+        accent_emb = to_gpu(accent_emb).float()
 
         return ((ppg_padded, input_lengths, acoustic_padded, max_len,
-                 output_lengths),
+                 output_lengths, speaker_emb, accent_emb),
                 (acoustic_padded, gate_padded))
 
     def parse_input(self, inputs):
