@@ -57,7 +57,7 @@ def create_hparams(**kwargs):
         "output_directory": '/home/zheng_zhang7/fac-via-ppg/checkpoint/train_0803',  # Directory to save checkpoints.
         # Directory to save tensorboard logs. Just keep it like this.
         "log_directory": 'log',
-        'data_dir': '/home/zheng_zhang7/seq2seq_accent_conversion_model',
+        'data_dir': '/home/zheng_zhang7/fac-via-ppg',
         # "checkpoint_path": '/home/zheng_zhang7/fac-via-ppg/interspeech19-stage/ppg2speech-si-am-si-tacotron-bdl2ykwk-final/tacotron_checkpoint_11000',  # Path to a checkpoint file.
         "checkpoint_path": None,
         "use_speaker_emb": True,
