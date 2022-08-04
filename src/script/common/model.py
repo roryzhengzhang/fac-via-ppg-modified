@@ -583,7 +583,7 @@ class Tacotron2(nn.Module):
 
     def forward(self, inputs):
         inputs, input_lengths, targets, max_len, \
-            output_lengths = self.parse_input(inputs)
+            output_lengths, speaker_embs, accent_embs = self.parse_input(inputs)
         input_lengths, output_lengths = input_lengths.data, output_lengths.data
 
         # inputs: (B, D, T)
@@ -593,10 +593,16 @@ class Tacotron2(nn.Module):
         encoder_output_length = encoder_outputs.size(1)
         if self.use_speaker_emb:
             speaker_embs = speaker_embs.unsqueeze(1).repeat(1, encoder_output_length, 1)
+            for i, input_len in enumerate(input_lengths):
+                if input_len < encoder_output_length:
+                    speaker_embs[i, input_len:, :] = 0
             decoder_inputs = torch.cat((decoder_inputs, speaker_embs), 2)
 
         if self.use_accent_emb:
             accent_embs = accent_embs.unsqueeze(1).repeat(1, encoder_output_length, 1)
+            for i, input_len in enumerate(input_lengths):
+                if input_len < encoder_output_length:
+                    accent_embs[i, input_len:, :] = 0
             decoder_inputs = torch.cat((decoder_inputs, accent_embs), 2)
 
         acoustic_outputs, gate_outputs, alignments = self.decoder(
