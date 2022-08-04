@@ -593,8 +593,6 @@ class Tacotron2(nn.Module):
         encoder_outputs = self.encoder(inputs, input_lengths)
         decoder_inputs = encoder_outputs
 
-        print(f"encoder output size: {decoder_inputs.size()}")
-
         encoder_output_length = encoder_outputs.size(1)
         if self.use_speaker_emb:
             speaker_embs = speaker_embs.unsqueeze(1).repeat(1, encoder_output_length, 1)
@@ -602,7 +600,6 @@ class Tacotron2(nn.Module):
                 if input_len < encoder_output_length:
                     speaker_embs[i, input_len:, :] = 0
             decoder_inputs = torch.cat((decoder_inputs, speaker_embs), 2)
-            print(f"decoder input size: {decoder_inputs.size()}")
 
         if self.use_accent_emb:
             accent_embs = accent_embs.unsqueeze(1).repeat(1, encoder_output_length, 1)
@@ -610,9 +607,7 @@ class Tacotron2(nn.Module):
                 if input_len < encoder_output_length:
                     accent_embs[i, input_len:, :] = 0
             decoder_inputs = torch.cat((decoder_inputs, accent_embs), 2)
-            print(f"decoder input size: {decoder_inputs.size()}")
         
-        print(f"decoder input size: {decoder_inputs.size()}")
 
         acoustic_outputs, gate_outputs, alignments = self.decoder(
             decoder_inputs, targets, memory_lengths=input_lengths)
