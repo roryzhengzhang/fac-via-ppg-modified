@@ -543,6 +543,8 @@ class Tacotron2(nn.Module):
         self.mask_padding = hparams.mask_padding
         self.fp16_run = hparams.fp16_run
         self.n_acoustic_feat_dims = hparams.n_acoustic_feat_dims
+        self.use_speaker_emb = hparams.use_speaker_emb
+        self.use_accent_emb = hparams.use_accent_emb
         self.encoder = Encoder(hparams)
         self.decoder = Decoder(hparams)
         self.postnet = Postnet(hparams)
