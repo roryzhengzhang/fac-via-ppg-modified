@@ -101,6 +101,7 @@ def load_filepaths(filename):
     """
     with open(filename) as f:
         filepaths = [line.strip() for line in f]
+    print(f"filepaths: {filepaths}")
     return filepaths
 
 
