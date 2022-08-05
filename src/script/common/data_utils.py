@@ -221,7 +221,10 @@ class PPGMelLoader(torch.utils.data.Dataset):
                     accent_emb = np.load(os.path.join(hparams.data_dir, accent_path))
                     # self.ppg_sequences.append(os.path.join(hparams.data_dir, src_ppg))
                     # self.acoustic_sequences.append(os.path.join(hparams.data_dir, tar_mel))
-                    ppg_feat = self.extract_ppg_feats(os.path.join(hparams.data_dir, src_wav), is_full_ppg=True)
+                    if hparams.mode == 'ppg':
+                        ppg_feat = self.extract_ppg_feats(os.path.join(hparams.data_dir, src_wav), is_full_ppg=True)
+                    else:
+                        ppg_feat = np.load(os.path.join(hparams.data_dir, src_wav))
                     mel_feat = self.extract_mel_feats(os.path.join(hparams.data_dir, tar_wav))
                     self.ppg_sequences.append(ppg_feat.astype(np.float32))
                     self.acoustic_sequences.append(mel_feat)

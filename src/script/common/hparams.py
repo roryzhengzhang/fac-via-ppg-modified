@@ -80,6 +80,7 @@ def create_hparams(**kwargs):
         "is_full_ppg": True,  # Whether to use the full PPG or not.
         "is_append_f0": False,  # Currently only effective at sentence level
         "ppg_subsampling_factor": 1,  # Sub-sample the ppg & acoustic sequence.
+        "mode": "bnf",
         # Cases
         # |'load_feats_from_disk'|'is_cache_feats'|Note
         # |True                  |True            |Error
@@ -115,21 +116,21 @@ def create_hparams(**kwargs):
         "encoder_kernel_size": 5,
         "encoder_n_convolutions": 3,
         # "encoder_embedding_dim": 600,
-        "encoder_embedding_dim": 512,
-        "decoder_input_dim": 512,
+        "encoder_embedding_dim": 600,
+        "decoder_input_dim": 600,
 
         # Decoder parameters
         # "decoder_rnn_dim": 300,
-        "decoder_rnn_dim": 1024,
-        "prenet_dim": 256,
+        "decoder_rnn_dim": 300,
+        "prenet_dim": 300,
         "max_decoder_steps": 1000,
         "gate_threshold": 0.5,
         "p_attention_dropout": 0.1,
         "p_decoder_dropout": 0.1,
 
         # Attention parameters
-        "attention_rnn_dim": 1024,
-        "attention_dim": 128,
+        "attention_rnn_dim": 300,
+        "attention_dim": 150,
         # +- time steps to look at when computing the attention. Set to None
         # to block it.
         "attention_window_size": 20,
