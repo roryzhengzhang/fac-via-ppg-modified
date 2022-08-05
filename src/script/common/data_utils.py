@@ -203,34 +203,34 @@ class PPGMelLoader(torch.utils.data.Dataset):
         self.accent_embs = []
 
         if self.load_feats_from_disk:
-            print(f"load feats from disk enabled")
-            # print('Loading data from %s.' % self.feats_cache_path)
-            # with open(self.feats_cache_path, 'rb') as f:
-            #     data = pickle.load(f)
-            # self.ppg_sequences = data[0]
-            # self.acoustic_sequences = data[1]
-            if data_utterance_paths is None:
-                raise ValueError("data paths is None")
+        #     print(f"load feats from disk enabled")
+        #     # print('Loading data from %s.' % self.feats_cache_path)
+        #     # with open(self.feats_cache_path, 'rb') as f:
+        #     #     data = pickle.load(f)
+        #     # self.ppg_sequences = data[0]
+        #     # self.acoustic_sequences = data[1]
+        #     if data_utterance_paths is None:
+        #         raise ValueError("data paths is None")
             
-            with open(data_utterance_paths, 'r') as f:
-                for line in f:
-                    line = line.replace('\n', '')
-                    # src_ppg, tar_mel, speaker_emb, accent_emb = line.split(',')
-                    src_wav, tar_wav, speaker_path, accent_path = line.split(',')
-                    speaker_emb = np.load(os.path.join(hparams.data_dir, speaker_path))
-                    accent_emb = np.load(os.path.join(hparams.data_dir, accent_path))
-                    # self.ppg_sequences.append(os.path.join(hparams.data_dir, src_ppg))
-                    # self.acoustic_sequences.append(os.path.join(hparams.data_dir, tar_mel))
-                    if hparams.mode == 'ppg':
-                        ppg_feat = self.extract_ppg_feats(os.path.join(hparams.data_dir, src_wav), is_full_ppg=True)
-                    else:
-                        ppg_feat = np.load(os.path.join(hparams.data_dir, src_wav))
-                    mel_feat = self.extract_mel_feats(os.path.join(hparams.data_dir, tar_wav))
-                    self.ppg_sequences.append(ppg_feat.astype(np.float32))
-                    self.acoustic_sequences.append(mel_feat)
-                    self.speaker_embs.append(speaker_emb)
-                    self.accent_embs.append(accent_emb)
-        else:
+        #     with open(data_utterance_paths, 'r') as f:
+        #         for line in f:
+        #             line = line.replace('\n', '')
+        #             # src_ppg, tar_mel, speaker_emb, accent_emb = line.split(',')
+        #             src_wav, tar_wav, speaker_path, accent_path = line.split(',')
+        #             speaker_emb = np.load(os.path.join(hparams.data_dir, speaker_path))
+        #             accent_emb = np.load(os.path.join(hparams.data_dir, accent_path))
+        #             # self.ppg_sequences.append(os.path.join(hparams.data_dir, src_ppg))
+        #             # self.acoustic_sequences.append(os.path.join(hparams.data_dir, tar_mel))
+        #             if hparams.mode == 'ppg':
+        #                 ppg_feat = self.extract_ppg_feats(os.path.join(hparams.data_dir, src_wav), is_full_ppg=True)
+        #             else:
+        #                 ppg_feat = np.load(os.path.join(hparams.data_dir, src_wav))
+        #             mel_feat = self.extract_mel_feats(os.path.join(hparams.data_dir, tar_wav))
+        #             self.ppg_sequences.append(ppg_feat.astype(np.float32))
+        #             self.acoustic_sequences.append(mel_feat)
+        #             self.speaker_embs.append(speaker_emb)
+        #             self.accent_embs.append(accent_emb)
+        # else:
             print(f"load_feats_from_disk: {self.load_feats_from_disk}")
             for utterance_path in data_utterance_paths:
                 ppg_feat_pair = self.extract_utterance_feats(utterance_path,
@@ -344,23 +344,23 @@ class PPGMelLoader(torch.utils.data.Dataset):
         Returns:
             T*D1 PPG sequence, T*D2 mels
         """
-        # if self.ppg_subsampling_factor == 1:
-        #     curr_ppg = self.ppg_sequences[index]
-        # else:
-        #     curr_ppg = self.ppg_sequences[index][
-        #                0::self.ppg_subsampling_factor, :]
-
-        # return torch.from_numpy(curr_ppg), self.acoustic_sequences[index]
-
         if self.ppg_subsampling_factor == 1:
-            # curr_ppg = np.load(self.ppg_sequences[index])
             curr_ppg = self.ppg_sequences[index]
         else:
-            # curr_ppg = np.load(self.ppg_sequences[index][
-            #            0::self.ppg_subsampling_factor, :])
-            curr_ppg = self.ppg_sequences[index][0::self.ppg_subsampling_factor, :]
+            curr_ppg = self.ppg_sequences[index][
+                       0::self.ppg_subsampling_factor, :]
 
-        return torch.from_numpy(curr_ppg), self.acoustic_sequences[index], torch.from_numpy(self.speaker_embs[index]), torch.from_numpy(self.accent_embs[index])
+        return torch.from_numpy(curr_ppg), self.acoustic_sequences[index]
+
+        # if self.ppg_subsampling_factor == 1:
+        #     # curr_ppg = np.load(self.ppg_sequences[index])
+        #     curr_ppg = self.ppg_sequences[index]
+        # else:
+        #     # curr_ppg = np.load(self.ppg_sequences[index][
+        #     #            0::self.ppg_subsampling_factor, :])
+        #     curr_ppg = self.ppg_sequences[index][0::self.ppg_subsampling_factor, :]
+
+        # return torch.from_numpy(curr_ppg), self.acoustic_sequences[index], torch.from_numpy(self.speaker_embs[index]), torch.from_numpy(self.accent_embs[index])
 
     def __len__(self):
         return len(self.ppg_sequences)
