@@ -254,6 +254,7 @@ class PPGMelLoader(torch.utils.data.Dataset):
             feat_pairs: A list, each is a [pps, mel] pair.
         """
         utt = Utterance()
+        print(f"data_utterance_path: {data_utterance_path}")
         fs, wav = wavfile.read(data_utterance_path)
         utt.fs = fs
         utt.wav = wav
