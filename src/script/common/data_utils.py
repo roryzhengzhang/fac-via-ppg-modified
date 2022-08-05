@@ -171,7 +171,7 @@ class PPGMelLoader(torch.utils.data.Dataset):
             data_utterance_paths: A text file containing a list of file paths.
             hparams: The hyper-parameters.
         """
-        # self.data_utterance_paths = load_filepaths(data_utterance_paths)
+        self.data_utterance_paths = load_filepaths(data_utterance_paths)
         self.max_wav_value = hparams.max_wav_value
         self.sampling_rate = hparams.sampling_rate
         self.is_full_ppg = hparams.is_full_ppg
