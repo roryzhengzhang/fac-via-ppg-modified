@@ -551,8 +551,10 @@ class Tacotron2(nn.Module):
         self.postnet = Postnet(hparams)
 
     def parse_batch(self, batch):
-        ppg_padded, input_lengths, acoustic_padded, gate_padded,\
-            output_lengths, speaker_emb, accent_emb = batch
+        # ppg_padded, input_lengths, acoustic_padded, gate_padded, \
+        #     output_lengths, speaker_emb, accent_emb = batch
+        ppg_padded, input_lengths, acoustic_padded, gate_padded, \
+            output_lengths = batch
         ppg_padded = to_gpu(ppg_padded).float()
         input_lengths = to_gpu(input_lengths).long()
         max_len = torch.max(input_lengths.data).item()
@@ -585,8 +587,10 @@ class Tacotron2(nn.Module):
         return outputs
 
     def forward(self, inputs):
+        # inputs, input_lengths, targets, max_len, \
+        #     output_lengths, speaker_embs, accent_embs = self.parse_input(inputs)
         inputs, input_lengths, targets, max_len, \
-            output_lengths, speaker_embs, accent_embs = self.parse_input(inputs)
+            output_lengths = self.parse_input(inputs)
         input_lengths, output_lengths = input_lengths.data, output_lengths.data
 
         # inputs: (B, D, T)
