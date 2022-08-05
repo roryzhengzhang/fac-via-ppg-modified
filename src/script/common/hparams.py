@@ -80,7 +80,7 @@ def create_hparams(**kwargs):
         "is_full_ppg": True,  # Whether to use the full PPG or not.
         "is_append_f0": False,  # Currently only effective at sentence level
         "ppg_subsampling_factor": 1,  # Sub-sample the ppg & acoustic sequence.
-        "mode": "bnf",
+        "mode": "ppg",
         # Cases
         # |'load_feats_from_disk'|'is_cache_feats'|Note
         # |True                  |True            |Error
