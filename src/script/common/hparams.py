@@ -152,7 +152,7 @@ def create_hparams(**kwargs):
         "learning_rate": 1e-5,
         "weight_decay": 1e-6,
         "grad_clip_thresh": 1.0,
-        "batch_size": 48,
+        "batch_size": 6,
         "mask_padding": True,  # set model's padded outputs to padded values
         "mel_weight": 1,
         "gate_weight": 0.005
