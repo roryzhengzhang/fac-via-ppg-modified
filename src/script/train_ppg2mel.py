@@ -41,7 +41,7 @@ import torch.distributed as dist
 from torch.utils.data.distributed import DistributedSampler
 from torch.utils.data import DataLoader
 from common.fp16_optimizer import FP16_Optimizer
-from common.model import Tacotron2
+from common.model_org import Tacotron2
 from common.data_utils import PPGMelLoader, ppg_acoustics_collate
 from common.loss_function import Tacotron2Loss
 from common.logger import Tacotron2Logger
