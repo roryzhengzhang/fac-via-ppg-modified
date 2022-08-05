@@ -418,9 +418,12 @@ def ppg_acoustics_collate(batch):
     ppg_padded = ppg_padded.transpose(1, 2)
     acoustic_padded = acoustic_padded.transpose(1, 2)
 
-    speaker_emb = torch.stack([x[2] for x in batch], dim=0)
+    # speaker_emb = torch.stack([x[2] for x in batch], dim=0)
 
-    accent_emb = torch.stack([x[3] for x in batch], dim=0)
+    # accent_emb = torch.stack([x[3] for x in batch], dim=0)
+
+    return ppg_padded, input_lengths, acoustic_padded, gate_padded,\
+        output_lengths
 
     return ppg_padded, input_lengths, acoustic_padded, gate_padded,\
         output_lengths, speaker_emb, accent_emb

@@ -72,12 +72,12 @@ def create_hparams(**kwargs):
         ################################
         # Passed as a txt file, see data/filelists/training-set.txt for an
         # example.
-        "training_files": '/home/zheng_zhang7/fac-via-ppg/data/filelists/validation-set-aaron.txt',
+        "training_files": '/home/zheng_zhang7/fac-via-ppg/data/filelists/tmp-train-aaron.txt ',
         # "training_files": '/home/zheng_zhang7/fac-via-ppg/data/filelists/ppg_train_pairs.txt',
         # Passed as a txt file, see data/filelists/validation-set.txt for an
         # example.
         # "validation_files": '/home/zheng_zhang7/fac-via-ppg/data/filelists/ppg_val_pairs.txt',
-        "validation_files": '/home/zheng_zhang7/fac-via-ppg/data/filelists/validation-set-aaron.txt',
+        "validation_files": '/home/zheng_zhang7/fac-via-ppg/data/filelists/tmp-train-aaron.txt ',
         "is_full_ppg": True,  # Whether to use the full PPG or not.
         "is_append_f0": False,  # Currently only effective at sentence level
         "ppg_subsampling_factor": 1,  # Sub-sample the ppg & acoustic sequence.
