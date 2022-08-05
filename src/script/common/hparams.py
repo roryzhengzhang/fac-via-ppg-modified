@@ -117,8 +117,8 @@ def create_hparams(**kwargs):
         "encoder_kernel_size": 5,
         "encoder_n_convolutions": 3,
         # "encoder_embedding_dim": 600,
-        "encoder_embedding_dim": 600,
-        "decoder_input_dim": 600,
+        "encoder_embedding_dim": 512,
+        "decoder_input_dim": 512,
 
         # Decoder parameters
         # "decoder_rnn_dim": 300,
