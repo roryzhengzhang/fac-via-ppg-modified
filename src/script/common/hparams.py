@@ -54,10 +54,10 @@ def create_hparams(**kwargs):
         "dist_url": "tcp://localhost:54321",
         "cudnn_enabled": True,
         "cudnn_benchmark": False,
-        "output_directory": '/home/zheng_zhang7/fac-via-ppg/checkpoint/train_0804',  # Directory to save checkpoints.
+        "output_directory": '/home/zheng_zhang7/fac-via-ppg-modified/checkpoint/train_0804',  # Directory to save checkpoints.
         # Directory to save tensorboard logs. Just keep it like this.
         "log_directory": 'log',
-        'data_dir': '/home/zheng_zhang7/fac-via-ppg',
+        'data_dir': '/home/zheng_zhang7/fac-via-ppg-modified',
         # "checkpoint_path": '/home/zheng_zhang7/fac-via-ppg/interspeech19-stage/ppg2speech-si-am-si-tacotron-bdl2ykwk-final/tacotron_checkpoint_11000',  # Path to a checkpoint file.
         "checkpoint_path": None,
         "use_speaker_emb": False,
@@ -72,12 +72,12 @@ def create_hparams(**kwargs):
         ################################
         # Passed as a txt file, see data/filelists/training-set.txt for an
         # example.
-        "training_files": '/home/zheng_zhang7/fac-via-ppg/data/filelists/tmp-train-aaron.txt',
+        "training_files": '/home/zheng_zhang7/fac-via-ppg-modified/data/filelists/tmp-train-aaron.txt',
         # "training_files": '/home/zheng_zhang7/fac-via-ppg/data/filelists/ppg_train_pairs.txt',
         # Passed as a txt file, see data/filelists/validation-set.txt for an
         # example.
         # "validation_files": '/home/zheng_zhang7/fac-via-ppg/data/filelists/ppg_val_pairs.txt',
-        "validation_files": '/home/zheng_zhang7/fac-via-ppg/data/filelists/tmp-train-aaron.txt',
+        "validation_files": '/home/zheng_zhang7/fac-via-ppg-modified/data/filelists/tmp-train-aaron.txt',
         "is_full_ppg": True,  # Whether to use the full PPG or not.
         "is_append_f0": False,  # Currently only effective at sentence level
         "ppg_subsampling_factor": 1,  # Sub-sample the ppg & acoustic sequence.
@@ -149,7 +149,7 @@ def create_hparams(**kwargs):
         # Optimization Hyperparameters #
         ################################
         "use_saved_learning_rate": False,
-        "learning_rate": 1e-5,
+        "learning_rate": 1e-4,
         "weight_decay": 1e-6,
         "grad_clip_thresh": 1.0,
         "batch_size": 6,
