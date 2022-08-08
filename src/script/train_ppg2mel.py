@@ -305,6 +305,8 @@ if __name__ == '__main__':
     print("cuDNN Enabled:", hparams.cudnn_enabled)
     print("cuDNN Benchmark:", hparams.cudnn_benchmark)
 
+    print(f"hyparams: {hparams}")
+
     train(hparams.output_directory, hparams.log_directory,
           hparams.checkpoint_path, hparams.warm_start, hparams.n_gpus,
           hparams.rank, hparams.group_name, hparams)
